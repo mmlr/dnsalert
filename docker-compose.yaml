@@ -1,0 +1,14 @@
+services:
+    dnsalert:
+        build: .
+        image: mmlr/dnsalert
+        ports:
+            - 5300:53/udp
+            - 9855:9855
+        volumes:
+            - .:/source:ro
+        init: true
+        restart: always
+        environment:
+            - PYTHONUNBUFFERED=1
+        command: ['ns1.example.org', 'alerting.example.org']
